@@ -358,9 +358,9 @@
 				INFOPLIST_FILE = Calculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bamuda.calculator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bamuda.mycalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "27122ea2-3472-4135-9f5d-e20ffc956ae3";
+				PROVISIONING_PROFILE = "d6f2d4ca-40de-4586-ab51-0da12e740d3e";
 				PROVISIONING_PROFILE_SPECIFIER = "calculator dev";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -377,9 +377,9 @@
 				INFOPLIST_FILE = Calculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bamuda.calculator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bamuda.mycalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "99341f31-2610-4d7d-9e7b-01e506da469e";
+				PROVISIONING_PROFILE = "b0aeb0c7-c91c-4e5b-9c00-2df19ae4015b";
 				PROVISIONING_PROFILE_SPECIFIER = "calculator dist";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
