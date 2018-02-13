@@ -12,19 +12,36 @@ let maxLength = 10
 class ViewController: UIViewController {
     
     @IBOutlet weak var resultLabel: UILabel!
-
+    @IBOutlet weak var optionalLabel: UILabel!
+    
     var hasOp = false
     let ops = ["+","-","*","/"]
+    var precedences = [String: Int]()  //operator precedence dictionary
+    var questionStartIndex = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         resultLabel.text = ""
+        precedences["+"] = 1
+        precedences["-"] = 1
+        precedences["x"] = 2
+        precedences["÷"] = 2
+        
+        optionalLabel.text = ""
+        resultLabel.text = ""
     }
     
     
     @IBAction func handleButtonPress(sender: UIButton) {
+        if resultLabel.text == "Ready" {
+            optionalLabel.text = ""
+            resultLabel.text = ""
+        }
+        
         var currentText = resultLabel.text!
+        var currentOptionalText = optionalLabel.text!
+        
         let textLabel = sender.titleLabel?.text
         if let text = textLabel {
             switch text {
@@ -32,22 +49,88 @@ class ViewController: UIViewController {
                 if hasOp {
                     //Already has operator so remove previous one
                     currentText.removeLast()
+                    currentOptionalText.removeLast()
+                    currentOptionalText.removeLast()
+                    currentOptionalText.removeLast()
+                    currentOptionalText.removeLast()
                 }
                 
                 hasOp = true
                 resultLabel.text = "\(currentText)\(text)"
                 
+                //Process  optional display
+                if let lastChar = currentOptionalText.last {
+                    let prevpreced = precedences[String(lastChar)] ?? -1
+                    if let _ = currentOptionalText.range(of: "?")  {
+                        //Already has placeholder
+                        if prevpreced != -1 {
+                            if precedences["\(text)"]! > prevpreced {
+                                //Previous operator precedence is greater so swap position
+                                currentOptionalText.removeLast()
+                                currentOptionalText += "\(text)" + " \(String(lastChar))"
+                             }
+                        }
+                        
+                        optionalLabel.text = currentOptionalText
+                    } else {
+                        if prevpreced != -1 {
+                            if precedences["\(text)"]! > prevpreced {
+                                //Previous operator precedence is greater so swap position
+                                currentOptionalText.removeLast()
+                                currentOptionalText += "? \(text)" + " \(String(lastChar))"
+                                optionalLabel.text = currentOptionalText
+                            } else {
+                                optionalLabel.text = "\(currentOptionalText) ? \(text)"
+                            }
+                        } else {
+                            optionalLabel.text = "\(currentOptionalText) ? \(text)"
+                        }
+                        questionStartIndex = -1
+                    }
+                } else {
+                    optionalLabel.text = " ? \(text)"  //For empty string
+                    questionStartIndex = -1
+                }
+
             case "=":
                 if hasOp {
                     //Last is operator
                     currentText.removeLast()
                     resultLabel.text = "\(currentText)"
                     hasOp = false
-                }
+                  }
                 resultLabel.text = "\(calculate(resultLabel.text))"
+                optionalLabel.text = resultLabel.text
+                questionStartIndex = -1
+
             default:
                 //Number input
                 resultLabel.text = "\(currentText)\(text)"
+                
+                if let quesRange = currentOptionalText.range(of: "?")  {
+                    //Already has placeholder
+                    questionStartIndex = currentOptionalText.distance(from: currentOptionalText.startIndex, to: quesRange.lowerBound)
+                    
+                    //Replace the ? with number
+                    let start = currentOptionalText.index(currentOptionalText.startIndex, offsetBy: questionStartIndex);
+                    let end = currentOptionalText.index(currentOptionalText.startIndex, offsetBy: questionStartIndex + 1);
+                    currentOptionalText.replaceSubrange(start..<end, with: text)
+                    optionalLabel.text = currentOptionalText
+                    //Progress to next position
+                    questionStartIndex += 1
+                } else if questionStartIndex > -1 {
+                    //More digit
+                    currentOptionalText.insert(text[text.startIndex], at: currentOptionalText.index(currentOptionalText.startIndex, offsetBy: questionStartIndex))
+                    
+                    optionalLabel.text = currentOptionalText
+                    //Progress to next position
+                    questionStartIndex += 1
+                } else {
+                    //Simple append the text
+                    optionalLabel.text = "\(currentOptionalText)\(text)"
+                }
+                
+                
                 hasOp = false
                 break;
             }
@@ -99,7 +182,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clearButtontapped(_ sender: Any) {
-        resultLabel.text = ""
+        resultLabel.text = "Ready"
+        optionalLabel.text = "Ready"
     }
 }
 
