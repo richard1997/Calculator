@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4ez-Bv-26L">
-                                <rect key="frame" x="8" y="50" width="359" height="270"/>
+                                <rect key="frame" x="8" y="50" width="359" height="324"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5TH-Ab-3oG">
                                         <rect key="frame" x="8" y="0.0" width="343" height="54"/>
@@ -233,17 +233,27 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7T-gT-x0t">
+                                        <rect key="frame" x="8" y="270" width="343" height="54"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="SJM-KA-5vh" firstAttribute="trailing" secondItem="5TH-Ab-3oG" secondAttribute="trailing" id="3Sp-Gi-jxG"/>
                                     <constraint firstItem="66Z-Gm-6Ve" firstAttribute="trailing" secondItem="5TH-Ab-3oG" secondAttribute="trailing" id="3WB-ax-FYX"/>
+                                    <constraint firstItem="5TH-Ab-3oG" firstAttribute="top" secondItem="4ez-Bv-26L" secondAttribute="top" id="8aa-PF-U7P"/>
                                     <constraint firstItem="sB6-F3-zXU" firstAttribute="leading" secondItem="5TH-Ab-3oG" secondAttribute="leading" id="GCf-Ol-46L"/>
                                     <constraint firstItem="66Z-Gm-6Ve" firstAttribute="leading" secondItem="5TH-Ab-3oG" secondAttribute="leading" id="McI-bv-sSm"/>
                                     <constraint firstAttribute="trailing" secondItem="5TH-Ab-3oG" secondAttribute="trailing" constant="8" id="Rp3-Wb-Ymg"/>
                                     <constraint firstItem="5TH-Ab-3oG" firstAttribute="leading" secondItem="4ez-Bv-26L" secondAttribute="leading" constant="8" id="axB-Tq-4YJ"/>
                                     <constraint firstItem="Mrg-tD-f77" firstAttribute="leading" secondItem="5TH-Ab-3oG" secondAttribute="leading" id="iXQ-AV-fEK"/>
+                                    <constraint firstItem="m7T-gT-x0t" firstAttribute="top" secondItem="Mrg-tD-f77" secondAttribute="bottom" id="ilL-Oq-wlw"/>
                                     <constraint firstItem="SJM-KA-5vh" firstAttribute="leading" secondItem="5TH-Ab-3oG" secondAttribute="leading" id="lLQ-JF-eZe"/>
                                     <constraint firstItem="Mrg-tD-f77" firstAttribute="trailing" secondItem="5TH-Ab-3oG" secondAttribute="trailing" id="lwe-nF-T9M"/>
+                                    <constraint firstItem="m7T-gT-x0t" firstAttribute="trailing" secondItem="5TH-Ab-3oG" secondAttribute="trailing" id="mCf-LN-sae"/>
+                                    <constraint firstItem="m7T-gT-x0t" firstAttribute="leading" secondItem="5TH-Ab-3oG" secondAttribute="leading" id="sUB-8K-wK6"/>
                                     <constraint firstItem="sB6-F3-zXU" firstAttribute="trailing" secondItem="5TH-Ab-3oG" secondAttribute="trailing" id="ubw-VO-QUG"/>
                                 </constraints>
                             </stackView>
@@ -257,6 +267,7 @@
                         <viewLayoutGuide key="safeArea" id="Tdb-Cz-OBO"/>
                     </view>
                     <connections>
+                        <outlet property="optionalLabel" destination="m7T-gT-x0t" id="ejz-1p-dx0"/>
                         <outlet property="resultLabel" destination="5TH-Ab-3oG" id="wpj-Zu-LTW"/>
                     </connections>
                 </viewController>
